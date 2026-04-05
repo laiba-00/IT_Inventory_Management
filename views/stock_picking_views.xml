@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Stock Picking Form — IN/OUT fields -->
+    <record id="view_stock_picking_it_form" model="ir.ui.view">
+        <field name="name">stock.picking.it.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <!-- Stock IN fields -->
+                <field name="it_received_by"
+                       invisible="picking_type_code != 'incoming'"/>
+                <field name="it_purchase_reference"
+                       invisible="picking_type_code != 'incoming'"/>
+
+                <!-- Stock OUT fields -->
+                <field name="it_department"
+                       invisible="picking_type_code != 'outgoing'"/>
+                <field name="it_issued_by"
+                       invisible="picking_type_code != 'outgoing'"/>
+                <field name="it_purpose"
+                       invisible="picking_type_code != 'outgoing'"/>
+
+                <!-- Common -->
+                <field name="it_remarks"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_stock_move_it_tree" model="ir.ui.view">
+        <field name="name">stock.move.it.tree</field>
+        <field name="model">stock.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Movement History" create="false">
+                <field name="date" string="Date"/>
+                <field name="product_id" string="Product"/>
+                <field name="location_id" string="From"/>
+                <field name="location_dest_id" string="To"/>
+                <field name="quantity" string="Quantity"/>
+                <field name="reference" string="Reference No"/>
+                <field name="picking_type_id" string="Type"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

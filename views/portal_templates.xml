@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_it_inventory" name="IT Inventory Portal">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <h2>IT Equipment — Current Stock</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Equipment</th>
+                            <th>Device Type</th>
+                            <th>Location</th>
+                            <th>On Hand</th>
+                            <th>Min Qty</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="products" t-as="product">
+                            <tr>
+                                <td><t t-esc="product.name"/></td>
+                                <td><t t-esc="product.it_device_type or '-'"/></td>
+                                <td><t t-esc="product.it_device_location or '-'"/></td>
+                                <td><t t-esc="product.qty_available"/></td>
+                                <td><t t-esc="product.it_min_qty"/></td>
+                                <td>
+                                    <span t-if="product.it_low_stock_alert"
+                                          style="color:red;font-weight:bold;">
+                                        ⚠️ LOW
+                                    </span>
+                                    <span t-else="" style="color:green;">✅ OK</span>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

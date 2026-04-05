@@ -1,0 +1,21 @@
+{
+    'name': 'IT Inventory Management',
+    'version': '17.0.1.0.0',
+    'category': 'Inventory',
+    'summary': 'Manage IT equipment stock with purchase integration and low stock alerts',
+    'author': 'Your Name',
+    'depends': ['stock', 'purchase', 'product'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/product_category_data.xml',
+        'views/product_views.xml',
+        'views/stock_picking_views.xml',
+        'views/reorder_wizard_views.xml',
+        'reports/stock_report_action.xml',
+        'reports/stock_report_template.xml',
+        'views/menu_views.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
+}

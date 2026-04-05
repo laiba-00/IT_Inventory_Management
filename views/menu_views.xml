@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Stock IN action -->
+    <record id="action_it_stock_in" model="ir.actions.act_window">
+        <field name="name">Stock In (Receipts)</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('picking_type_code', '=', 'incoming')]</field>
+        <field name="context">{'default_picking_type_code': 'incoming'}</field>
+    </record>
+
+    <!-- Stock OUT action -->
+    <record id="action_it_stock_out" model="ir.actions.act_window">
+        <field name="name">Stock Out (Deliveries)</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('picking_type_code', '=', 'outgoing')]</field>
+        <field name="context">{'default_picking_type_code': 'outgoing'}</field>
+    </record>
+
+    <!-- Stock Level Report action -->
+    <record id="action_it_stock_report_menu" model="ir.actions.act_window">
+        <field name="name">IT Stock Level Report</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('it_device_type', '!=', False)]</field>
+    </record>
+
+    <menuitem id="menu_it_inventory_root"
+              name="IT Inventory"
+              sequence="10"/>
+
+    <menuitem id="menu_it_products"
+              name="IT Equipment"
+              parent="menu_it_inventory_root"
+              action="stock.product_template_action_product"
+              sequence="1"/>
+
+    <menuitem id="menu_it_stock_in"
+              name="Stock In (Receipts)"
+              parent="menu_it_inventory_root"
+              action="it_inventory.action_it_stock_in"
+              sequence="2"/>
+
+    <menuitem id="menu_it_stock_out"
+              name="Stock Out (Deliveries)"
+              parent="menu_it_inventory_root"
+              action="it_inventory.action_it_stock_out"
+              sequence="3"/>
+
+    <menuitem id="menu_it_movement_history"
+              name="Movement History"
+              parent="menu_it_inventory_root"
+              action="it_inventory.action_it_movement_report_menu"
+              sequence="4"/>
+
+    <menuitem id="menu_it_reorder"
+              name="Reorder Equipment"
+              parent="menu_it_inventory_root"
+              action="it_inventory.action_it_reorder_wizard"
+              sequence="5"/>
+
+    <menuitem id="menu_it_purchase_orders"
+              name="Purchase Orders"
+              parent="menu_it_inventory_root"
+              action="purchase.purchase_rfq"
+              sequence="6"/>
+
+    <menuitem id="menu_it_stock_report"
+              name="Stock Level Report"
+              parent="menu_it_inventory_root"
+              action="it_inventory.action_it_stock_report_menu"
+              sequence="7"/>
+</odoo>

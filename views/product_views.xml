@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_template_it_form" model="ir.ui.view">
+        <field name="name">product.template.it.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="IT Equipment Info" name="it_info">
+                    <div class="alert alert-warning"
+                         role="alert"
+                         invisible="not it_low_stock_alert">
+                        ⚠️ Stock is below minimum level! Please reorder this item.
+                    </div>
+                    <group>
+                        <group string="Device Details">
+                            <field name="it_device_type"/>
+                            <field name="it_serial_number"/>
+                            <field name="it_device_location"/>
+                        </group>
+                        <group string="Stock Info">
+                            <field name="it_warranty_date"/>
+                            <field name="it_min_qty"/>
+                            <field name="it_low_stock_alert" invisible="1"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <!-- IT Stock Report List View — no New button -->
+    <record id="view_it_stock_report_tree" model="ir.ui.view">
+        <field name="name">it.stock.report.tree</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <tree string="IT Stock Level Report" create="false">
+                <field name="name" string="Product"/>
+                <field name="it_device_type" string="Device Type"/>
+                <field name="it_device_location" string="Location"/>
+                <field name="it_warranty_date" string="Warranty Expiry"/>
+                <field name="it_min_qty" string="Min Qty"/>
+                <field name="qty_available" string="On Hand"/>
+                <field name="it_low_stock_alert" string="Low Stock"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
